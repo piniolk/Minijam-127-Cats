@@ -18,13 +18,15 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Update() {
         Vector2 movement = playerControls.PlayerControl.Walk.ReadValue<Vector2>();
-        rigidbody.transform.Translate(movement * Time.deltaTime * movementSpeed);
+
+        Vector3 vector3 = transform.position;
+        vector3.x += movement.x;
+        vector3.y += movement.y;
+
+        if(Physics2D.Raycast(vector3, Vector3.back).collider != null){
+            if(Physics2D.Raycast(vector3, Vector3.back).collider.gameObject.tag == "Walkable") {
+                rigidbody.transform.Translate(movement * Time.deltaTime * movementSpeed);
+            }
+        }
     }
-
-    public void WalkL() {
-        Debug.Log("Walk left");
-    }
-
-
-
 }
