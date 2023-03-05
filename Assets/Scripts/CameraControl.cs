@@ -30,7 +30,6 @@ public class CameraControl : MonoBehaviour {
         this.closestCamera.SetActive(true);
         currentActiveCamera.SetActive(false);
         currentActiveCamera = closestCamera;
-        Debug.Log("Function");
     }
 
     private GameObject GetClosestCamera() {

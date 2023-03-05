@@ -72,6 +72,73 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "CutSceneControl",
+            "id": "c05ba7ed-9076-4f33-acf1-59a5e01758ed",
+            "actions": [
+                {
+                    "name": "CutSceneEnd",
+                    "type": "Button",
+                    "id": "88b04782-2b9f-42f1-88aa-a44a134db9d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5de8e4cc-a629-4a8a-b5e4-5ce33d389fa1",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CutSceneEnd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9db3a46-8072-4f7f-a573-8512e3057551",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CutSceneEnd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Test",
+            "id": "7bbdf3a7-b26b-414f-a587-2212ed513f3f",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Value",
+                    "id": "85fc3f47-6f30-4f09-a819-c181bbe6cf9e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7b72991b-6012-43f0-b767-b801616a4c5b",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

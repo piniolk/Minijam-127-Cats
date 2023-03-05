@@ -94,6 +94,73 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""CutSceneControl"",
+            ""id"": ""c05ba7ed-9076-4f33-acf1-59a5e01758ed"",
+            ""actions"": [
+                {
+                    ""name"": ""CutSceneEnd"",
+                    ""type"": ""Button"",
+                    ""id"": ""88b04782-2b9f-42f1-88aa-a44a134db9d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5de8e4cc-a629-4a8a-b5e4-5ce33d389fa1"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CutSceneEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9db3a46-8072-4f7f-a573-8512e3057551"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CutSceneEnd"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Test"",
+            ""id"": ""7bbdf3a7-b26b-414f-a587-2212ed513f3f"",
+            ""actions"": [
+                {
+                    ""name"": ""New action"",
+                    ""type"": ""Value"",
+                    ""id"": ""85fc3f47-6f30-4f09-a819-c181bbe6cf9e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7b72991b-6012-43f0-b767-b801616a4c5b"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""New action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -101,6 +168,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         // PlayerControl
         m_PlayerControl = asset.FindActionMap("PlayerControl", throwIfNotFound: true);
         m_PlayerControl_Walk = m_PlayerControl.FindAction("Walk", throwIfNotFound: true);
+        // CutSceneControl
+        m_CutSceneControl = asset.FindActionMap("CutSceneControl", throwIfNotFound: true);
+        m_CutSceneControl_CutSceneEnd = m_CutSceneControl.FindAction("CutSceneEnd", throwIfNotFound: true);
+        // Test
+        m_Test = asset.FindActionMap("Test", throwIfNotFound: true);
+        m_Test_Newaction = m_Test.FindAction("New action", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -189,8 +262,82 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         }
     }
     public PlayerControlActions @PlayerControl => new PlayerControlActions(this);
+
+    // CutSceneControl
+    private readonly InputActionMap m_CutSceneControl;
+    private ICutSceneControlActions m_CutSceneControlActionsCallbackInterface;
+    private readonly InputAction m_CutSceneControl_CutSceneEnd;
+    public struct CutSceneControlActions
+    {
+        private @PlayerControls m_Wrapper;
+        public CutSceneControlActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CutSceneEnd => m_Wrapper.m_CutSceneControl_CutSceneEnd;
+        public InputActionMap Get() { return m_Wrapper.m_CutSceneControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CutSceneControlActions set) { return set.Get(); }
+        public void SetCallbacks(ICutSceneControlActions instance)
+        {
+            if (m_Wrapper.m_CutSceneControlActionsCallbackInterface != null)
+            {
+                @CutSceneEnd.started -= m_Wrapper.m_CutSceneControlActionsCallbackInterface.OnCutSceneEnd;
+                @CutSceneEnd.performed -= m_Wrapper.m_CutSceneControlActionsCallbackInterface.OnCutSceneEnd;
+                @CutSceneEnd.canceled -= m_Wrapper.m_CutSceneControlActionsCallbackInterface.OnCutSceneEnd;
+            }
+            m_Wrapper.m_CutSceneControlActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @CutSceneEnd.started += instance.OnCutSceneEnd;
+                @CutSceneEnd.performed += instance.OnCutSceneEnd;
+                @CutSceneEnd.canceled += instance.OnCutSceneEnd;
+            }
+        }
+    }
+    public CutSceneControlActions @CutSceneControl => new CutSceneControlActions(this);
+
+    // Test
+    private readonly InputActionMap m_Test;
+    private ITestActions m_TestActionsCallbackInterface;
+    private readonly InputAction m_Test_Newaction;
+    public struct TestActions
+    {
+        private @PlayerControls m_Wrapper;
+        public TestActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Newaction => m_Wrapper.m_Test_Newaction;
+        public InputActionMap Get() { return m_Wrapper.m_Test; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TestActions set) { return set.Get(); }
+        public void SetCallbacks(ITestActions instance)
+        {
+            if (m_Wrapper.m_TestActionsCallbackInterface != null)
+            {
+                @Newaction.started -= m_Wrapper.m_TestActionsCallbackInterface.OnNewaction;
+                @Newaction.performed -= m_Wrapper.m_TestActionsCallbackInterface.OnNewaction;
+                @Newaction.canceled -= m_Wrapper.m_TestActionsCallbackInterface.OnNewaction;
+            }
+            m_Wrapper.m_TestActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Newaction.started += instance.OnNewaction;
+                @Newaction.performed += instance.OnNewaction;
+                @Newaction.canceled += instance.OnNewaction;
+            }
+        }
+    }
+    public TestActions @Test => new TestActions(this);
     public interface IPlayerControlActions
     {
         void OnWalk(InputAction.CallbackContext context);
+    }
+    public interface ICutSceneControlActions
+    {
+        void OnCutSceneEnd(InputAction.CallbackContext context);
+    }
+    public interface ITestActions
+    {
+        void OnNewaction(InputAction.CallbackContext context);
     }
 }
